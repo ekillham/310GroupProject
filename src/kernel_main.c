@@ -40,17 +40,15 @@ int getEL(){
 
 void kernel_main(){
 //	clear_bss();
-
+	
+	
+	
+	/*
 	struct file fat_test;
-
-
 	sd_init();
 	fatInit();
 	fatOpen(&fat_test,"TEST");
 	fatRead(&fat_test,"TESTFILE",32);
-
-
-/*
       	init_pfa_list();
 
 	struct ppage* test = free_list->next;
