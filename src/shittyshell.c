@@ -11,7 +11,7 @@ void runShell(int argc, char **argv) {
 
     while(1){
         // 1. Call printf to print a prompt. Something like $ or > is fine.
-        printf("$ " );
+        esp_printf(putc, "$ " );
 
         // 2. Call getline() to read a line from the terminal. The arguments to
         //    getline are:
