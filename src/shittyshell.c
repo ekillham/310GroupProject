@@ -11,7 +11,8 @@ void runShell(int argc, char **argv) {
 
     while(1){
         // 1. Call printf to print a prompt. Something like $ or > is fine.
-        
+        printf("$ " );
+
         // 2. Call getline() to read a line from the terminal. The arguments to
         //    getline are:
         //    (i)   The address of line
@@ -20,7 +21,7 @@ void runShell(int argc, char **argv) {
         //    Make sure you initialize line to NULL before calling getline,
         //    otherwise getline won't do anything. `man getline` has some good
         //    example code.
-
+	
         // 3. getline() will return a line of text, including the \n newline
         //    character. We need to trim that off. Something like
         //           line[strlen(line)-1] = '\0';
