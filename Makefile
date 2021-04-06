@@ -23,6 +23,8 @@ OBJS = \
 	sd.o\
 	fat.o\
 	clibfuncs.o\
+	nalloc.o\
+	
 
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
