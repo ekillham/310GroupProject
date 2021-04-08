@@ -24,6 +24,9 @@ OBJS = \
 	fat.o\
 	clibfuncs.o\
 	nalloc.o\
+	shittyshell.o\
+	
+	
 	
 
 
