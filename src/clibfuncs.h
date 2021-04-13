@@ -14,5 +14,6 @@ int strcmp ( const char * str1, const char * str2 );
 int strncmp ( const char * str1, const char * str2, size_t n );
 int toupper(int c);
 char * strcpy ( char * destination, const char * source );
+int execv(const char *path, char *const argv[]);
 
 #endif
