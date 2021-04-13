@@ -116,4 +116,15 @@ char * strcpy ( char * destination, const char * source ) {
     return destination;
 }
 
+//to do
+int execv(const char *path, char *const argv[]){
+    //load file (using path) with FAT
+    //parse with elf (elf.h)
+    //temp buffer (with getLine() serial.h)
+    //find or create segments (data, stack, bss, etc)
+    //allocate pages (pages.h)
+    //map pages to virtual memory
+    //find entry point and jump to it to start running
+}
+
 
