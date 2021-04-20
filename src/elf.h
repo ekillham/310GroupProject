@@ -54,7 +54,7 @@ typedef struct{
 
 /* ELF Identification */
 
-#define EI_MAGO       0 /* File Identification */ 
+#define EI_MAG0       0 /* File Identification */ 
 #define EI_MAG1       1
 #define EI_MAG2       2
 #define EI_MAG3       3
@@ -136,5 +136,7 @@ typedef struct{
 	Elf64_Xword p_memsz;  /* Size of segment in memory */
 	Elf64_Xword p_align;  /* Alignment of segment */
 } Elf64_Phdr;
+
+int parse_elf_header(void *start)
 
 #endif
