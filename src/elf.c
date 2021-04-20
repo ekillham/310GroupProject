@@ -1,5 +1,4 @@
 
-#include "terminal.h"
 #include "rprintf.h"
 #include "elf.h"
 
@@ -38,7 +37,7 @@ int parse_elf_header(void *start) {
     if(hdr->e_ident[EI_MAG0] && hdr->e_ident[EI_MAG1] && hdr->e_ident[EI_MAG2] && hdr->e_ident[EI_MAG3] != 0x7f454c46) { // Check for valid magic number in ELF header
         return -1;
     }
-    if(hdr->e_machine != 2) { // Check for correct machine type
+    if(hdr->e_machine != 2) { // Check for correct machine type... not sure on correct number to validate against for 64bit 
         return -2;
     }
 
