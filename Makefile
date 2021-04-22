@@ -25,7 +25,7 @@ OBJS = \
 	clibfuncs.o\
 	nalloc.o\
 	uart.o\
-	shittyshell.o\
+	shell.o\
 	
 	
 	

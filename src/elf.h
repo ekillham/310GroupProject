@@ -100,7 +100,7 @@ typedef struct{
 	Elf64_Word sh_info;       /* Miscellaneous information */
 	Elf64_Xword sh_addralign; /* Address alignment boundary */
 	Elf64_Xword sh_entsize;   /* Size of entries, if section has table */
-} Elf64_Shdr
+} Elf64_Shdr;
 
 /* Section Types */
 
