@@ -7,6 +7,9 @@
 #include "rprintf.h"
 #include "nalloc.h"
 #include "serial.h"
+#include "process.h"
+
+struct process *currProcess;
 
 
 /*adding notes to this file from our initial meeting w/ Neil so that everyone can continue to writing to it while understanding the different steps we need to exec to go through */
@@ -15,7 +18,7 @@
 // 1 - copy elf file into memory
 // 2 jump to the correct address to run
 
-int _exec(char *path, struct process_context *ctx char *argv[]){	
+int _exec(char *path, char *argv[]){	
 	struct file fd;
 	int filesize;
 	int k;
@@ -32,15 +35,15 @@ int _exec(char *path, struct process_context *ctx char *argv[]){
 		return -2;
 	}
 
-	if(fatOpen(path &fd) < 0){
+	if(fatOpen(path, &fd) < 0){
 		return -1;
 	}
 
 //get filesize of so that we can size the pages correctly - getfilesize function  
 
-	memset(newProcess, 0,(struct process)); // zero out memory in newProcess
+	memset(newProcess, 0,sizeof(struct process)); // zero out memory in newProcess
 
-	strcpy(newProcess->path, path) //copy path if included in struct .. might remove later
+	strcpy(newProcess->path, path); //copy path if included in struct .. might remove later
 
 //create addProcess to add process to list of active processes; just use ListAdd() and create a dummy list of process
 //discuss with group how much we want to go into process handling and lists.
@@ -56,3 +59,5 @@ int _exec(char *path, struct process_context *ctx char *argv[]){
 //loop through program headers; create a new segement for each loadable  header; link that segment to the linked list of segments within our process struct
 //setup vaddr; map that new segement into the page table for the process
 //copy the data from our elf file image into the vaddr where the process is going to live in memory
+
+}

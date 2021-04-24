@@ -1,9 +1,9 @@
 
 
-CC := gcc
-LD := ld
-OBJDUMP := objdump
-OBJCOPY := objcopy
+CC := aarch64-none-elf-gcc
+LD := aarch64-none-elf-ld
+OBJDUMP := aarch64-none-elf-objdump
+OBJCOPY := aarch64-none-elf-objcopy
 CONFIGS := -DCONFIG_HEAP_SIZE=4096
 
 CFLAGS := -O0 -ffreestanding -fno-pie -fno-stack-protector -g3 -Wall -mgeneral-regs-only $(CONFIGS)
@@ -25,7 +25,8 @@ OBJS = \
 	clibfuncs.o\
 	nalloc.o\
 	uart.o\
-	shell.o\
+    process.o \
+#	shell.o\
 	
 	
 	
@@ -72,5 +73,6 @@ rootfs.img:
 	sudo mkdir -p /mnt/disk/boot/firmware
 	sudo mkdir /mnt/disk/bin
 	sudo mkdir /mnt/disk/etc
+	sudo cp rootfs/shell/shell /mnt/disk/bin
 	sudo umount /mnt/disk
 

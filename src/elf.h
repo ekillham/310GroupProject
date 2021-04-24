@@ -137,6 +137,6 @@ typedef struct{
 	Elf64_Xword p_align;  /* Alignment of segment */
 } Elf64_Phdr;
 
-int parse_elf_header(void *start)
+int parse_elf_header(void *start);
 
 #endif

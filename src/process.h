@@ -4,10 +4,10 @@
 struct process {
 	struct process *next;
 	struct process *prev;
-	struct process_context context;
 	uint64_t pid; /* Process ID */
 	struct segment *segmentList;
-}
+    char *path;
+};
 
 struct segement {
 	struct segment *next;
@@ -15,6 +15,6 @@ struct segement {
 	void *vaddr; /* Base of Segement */
 	struct physical_page *ppage_list; /* list of pages eassociated with segement might not be necessary */
 	struct page_directory_entry *pd; /* Process page directory and associated page table */
-}
+};
 
 #endif
