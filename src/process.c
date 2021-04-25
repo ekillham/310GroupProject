@@ -27,10 +27,18 @@ int _exec(char *path, char *argv[]){
 	struct Elf64_Ehdr *hdr;
 	struct Elf64_Phdr *pr_hdr;
 	struct process *newProcess = nalloc(sizeof(struct process));
-	int argc;
+	int argc = 1; //character count of argv. starts at 1 because argc will be 1 + number of spaces between arguments
 
 // add check to verify that argv is not NULL. Count number of arguments in argv
-
+	if(argv == NULL){
+		// return error or esp_printf(putc, "No arguments");  ??
+	}
+	int i = 0;
+	while(argv[i] != NULL){
+		if(argv[i] = ' ') //looking for open spaces in arg v
+			argc++;	
+	}
+	
 	if(newProcess == NULL){
 		return -2;
 	}
