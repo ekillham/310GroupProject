@@ -13,7 +13,7 @@ struct process *currProcess;
 
 
 /*adding notes to this file from our initial meeting w/ Neil so that everyone can continue to writing to it while understanding the different steps we need to exec to go through */
-
+//we should confirm with neil that our TODO's/comments on here are what we should be doing
 //exec
 // 1 - copy elf file into memory
 // 2 jump to the correct address to run
