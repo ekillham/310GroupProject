@@ -17,4 +17,6 @@ struct segement {
 	struct page_directory_entry *pd; /* Process page directory and associated page table */
 };
 
+int exec(char*, char* argv[]);
+
 #endif

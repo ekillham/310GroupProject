@@ -80,5 +80,6 @@ struct file {
 };
 
 void fatOpen(struct file* readfile, char* filename);
+void fatRead(struct file* readfile,char buffer,int bytes_read);
 
 #endif

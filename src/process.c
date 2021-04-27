@@ -10,17 +10,17 @@
 #include "process.h"
 
 struct process *currProcess;
-
+struct 
 
 /*adding notes to this file from our initial meeting w/ Neil so that everyone can continue to writing to it while understanding the different steps we need to exec to go through */
-//we should confirm with neil that our TODO's/comments on here are what we should be doing
+
 //exec
 // 1 - copy elf file into memory
 // 2 jump to the correct address to run
 
 int _exec(char *path, char *argv[]){	
 	struct file fd;
-	int filesize;
+	unsigned int filesize;
 	int k;
 	void *temp_vaddr = (void*)0x200000;
 	struct physical_page *temp_space;
@@ -47,18 +47,44 @@ int _exec(char *path, char *argv[]){
 		return -1;
 	}
 
-//get filesize of so that we can size the pages correctly - getfilesize function  
+	
 
 	memset(newProcess, 0,sizeof(struct process)); // zero out memory in newProcess
 
 	strcpy(newProcess->path, path); //copy path if included in struct .. might remove later
 
 //create addProcess to add process to list of active processes; just use ListAdd() and create a dummy list of process
-//discuss with group how much we want to go into process handling and lists.
+
 
 	currProcess = newProcess;
 
 //put contents into physical page & map physical pages to vaddr space
+	Elf64_Phdr pr_hdr [10]; //temp buffer for headers
+
+	for (int i = 0; i < hdr->e_phnum; i++) { //loop through program hdr entries
+
+		Elf64_Phdr *pr_hdr[i];
+	
+	/* should we do a check here to verify that the segment is loadable ? PT_Load status compared to segement type?  */ 
+		unsigned int filesize = pr_hdr->p_filesz / PAGE_SIZE + 1; 
+		void *vaddr = (void*) pr_hdr->p_vaddr;
+		struct ppage* page_alloc = 0;
+
+		for (int i = 0; i < filesize; i++){
+			temp_space = allocate_physical_pages(1); //setting default pages to 1 could make it more dynamic later  
+			temp_vaddr = mapPages(vaddr, page_alloc->physical_addr);   
+			
+			if(temp_vaddr < 0) {
+				return -1;
+			}
+
+			/* implement fatRead to read elf file into vaddr? */
+
+			vaddr += PAGE_SIZE;
+			}
+		
+
+	}
 
 //read contents of elf file into memory
 	//set hdr = temp_vaddr

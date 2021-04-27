@@ -1,3 +1,6 @@
+
+#define PAGE_SIZE 0x200000
+
 struct ppage{
 	struct ppage *next;
 	struct ppage *prev;
