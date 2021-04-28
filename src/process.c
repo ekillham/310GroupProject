@@ -28,6 +28,8 @@ int _exec(char *path, char *argv[]){
 	struct Elf64_Phdr *pr_hdr;
 	struct process *newProcess = nalloc(sizeof(struct process));
 	int argc = 1; //character count of argv. starts at 1 because argc will be 1 + number of spaces between arguments
+	//struct listElement* active1 = {NULL, NULL}; 
+	struct listElement* head; 
 
 // add check to verify that argv is not NULL. Count number of arguments in argv
 	if(argv == NULL){
@@ -52,7 +54,9 @@ int _exec(char *path, char *argv[]){
 	memset(newProcess, 0,sizeof(struct process)); // zero out memory in newProcess
 
 	strcpy(newProcess->path, path); //copy path if included in struct .. might remove later
-
+	
+	
+	listAdd(head, 
 //create addProcess to add process to list of active processes; just use ListAdd() and create a dummy list of process
 
 
