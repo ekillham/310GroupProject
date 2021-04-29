@@ -64,38 +64,36 @@ int _exec(char *path, char *argv[]){
 
 //put contents into physical page & map physical pages to vaddr space
 	Elf64_Phdr pr_hdr [10]; //temp buffer for headers
-
+		
 	for (int i = 0; i < hdr->e_phnum; i++) { //loop through program hdr entries
 
 		Elf64_Phdr *pr_hdr[i];
-	
+
 	/* should we do a check here to verify that the segment is loadable ? PT_Load status compared to segement type?  */ 
 		unsigned int filesize = pr_hdr->p_filesz / PAGE_SIZE + 1; 
 		void *vaddr = (void*) pr_hdr->p_vaddr;
 		struct ppage* page_alloc = 0;
 
 		for (int i = 0; i < filesize; i++){
-			temp_space = allocate_physical_pages(1); //setting default pages to 1 could make it more dynamic later  
+			temp_space = allocate_physical_pages(1); 
 			temp_vaddr = mapPages(vaddr, page_alloc->physical_addr);   
 			
 			if(temp_vaddr < 0) {
 				return -1;
 			}
 
-			/* implement fatRead to read elf file into vaddr? */
-
+			fatRead(&fd, (void*)temp_vaddr, filesize); //read contents of elf file into memory
 			vaddr += PAGE_SIZE;
 			}
-		
 
 	}
 
-//read contents of elf file into memory
+
 	//set hdr = temp_vaddr
 	//use the program header offset to find where it starts temp_vaddr+hdr->phoff
 
-//loop through program headers; create a new segement for each loadable  header; link that segment to the linked list of segments within our process struct
-//setup vaddr; map that new segement into the page table for the process
+//create a new segement for each loadable  header;
+//link that segment to the linked list of segments within our process struct
 //copy the data from our elf file image into the vaddr where the process is going to live in memory
 
 }
