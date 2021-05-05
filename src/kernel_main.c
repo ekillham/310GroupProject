@@ -5,6 +5,9 @@
 #include "mmu.h"
 #include "fat.h"
 #include "sd.h"
+#include "clibfunc.h"
+#include "uart.h"
+#include "elf.h"
 
 int global;
 #define NULL (void*)0
@@ -40,27 +43,14 @@ int getEL(){
 
 void kernel_main(){
 //	clear_bss();
-	
-	
-	
-	/*
+
 	struct file fat_test;
+
+	init_pfa_list();
 	sd_init();
 	fatInit();
-	fatOpen(&fat_test,"TEST");
-	fatRead(&fat_test,"TESTFILE",32);
-      	init_pfa_list();
 
-	struct ppage* test = free_list->next;
-	esp_printf(putc, "Physical addr: %x \n", test->physical_addr);
-	test = allocate_physical_pages(2);
-	esp_printf(putc, "Physical addr (test) after npages: %x \n", test);
-	esp_printf(putc, "Physical addr (->physical_addr) after npages: %x \n", test->physical_addr);
-	free_physical_pages(test);
-	test = free_list->next;
-	esp_printf(putc, "Post free addr: %x \n", test->physical_addr);
-*/
-
+	//exec("/bin/shell");
 
 	while(1){
 
