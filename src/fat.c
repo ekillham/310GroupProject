@@ -76,6 +76,8 @@ void fatOpen(struct file* readfile, char* filename){
 	}
 }
 
+//TODO: Rewrite / add functionality to handle multiple clusters. Need to know where each cluster starts and how big a cluster is 
+//      find next cluster in the fat table 
 void fatRead(struct file* readfile,char buffer,int bytes_read){
 	int root_sector_value = ((bs->num_fat_tables * bs->num_sectors_per_fat) + bs->num_hidden_sectors + bs->num_reserved_sectors);
 

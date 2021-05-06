@@ -29,6 +29,12 @@ int parse_elf_header(void *start) {
         	printk("Alignment    = %08x\n", phdr->p_align);
         	phdr++;
     	}
+
+}
+
+int is_elf(Elf64_Ehdr *hdr){
+	
+	int iself = -1
 	// breaking out  tests into individual checks
 	if (
     		hdr->e_ident[EI_MAG0] == 0x7f &&
@@ -36,12 +42,13 @@ int parse_elf_header(void *start) {
     		hdr->e_ident[EI_MAG2] == 'L' &&
     		hdr->e_ident[EI_MAG3] == 'F'
     	) {
-        	esp_printf(putc,"This is an Elf file!\n"); 
+        	iself = 0; 
     	}
 
-    	if (hdr->e_ident[EI_CLASS] == ELFCLASS64){
-    		esp_printf(putc,"File made for 64-bit\n");
+    	if (iself != -1){
+    		iself = hdr->type;
     	}
 
-    	return 0;
+    	return iself;
+	
 }

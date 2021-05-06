@@ -54,22 +54,21 @@ int _exec(char *path, char *argv[]){
 
 	strcpy(newProcess->path, path); //copy path if included in struct
 
-//create addProcess to add process to list of active processes; just use ListAdd() and create a dummy list of process
-
 
 	currProcess = newProcess;
+	//TODO:create addProcess to add process to list of active processes; just use ListAdd() and create a dummy list of process
+
 	filesize = fd->rde->file_size / PAGE_SIZE + 1; 
 	fatRead(&fd, (void*)temp_vaddr, filesize);
 
 
-//put contents into physical page & map physical pages to vaddr space
+
 	//temp buffer for headers
 	hdr = temp_vaddr;
 	pr_hdr = temp_vaddr + hdr->e_phoff;	
 
 	for (int i = 0; i < hdr->e_phnum; i++) { //loop through program hdr entries
 
-		
 		void *vaddr = (void*) pr_hdr[i].p_vaddr;
 		struct ppage* page_alloc = 0;
 
@@ -92,11 +91,9 @@ int _exec(char *path, char *argv[]){
 	}
 
 
-	//set hdr = temp_vaddr
-	//use the program header offset to find where it starts temp_vaddr+hdr->phoff
 
-//create a new segement for each loadable  header;
-//link that segment to the linked list of segments within our process struct
+
 //copy the data from our elf file image into the vaddr where the process is going to live in memory
+
 
 }
