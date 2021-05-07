@@ -4,6 +4,7 @@
 
 #include <stdint.h>
 
+#define SECTOR_SIZE 512
 #define CLUSTER_SIZE 4096
 #define SECTORS_PER_CLUSTER (CLUSTER_SIZE/SECTOR_SIZE)
 
@@ -79,7 +80,7 @@ struct file {
     uint32_t start_cluster;
 };
 
-void fatOpen(struct file* readfile, char* filename);
-void fatRead(struct file* readfile,char buffer,int bytes_read);
+int fatOpen(struct file* readfile, char* filename);
+void fatRead(struct file* readfile, char* buffer,int bytes_read);
 
 #endif
