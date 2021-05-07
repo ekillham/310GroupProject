@@ -8,18 +8,14 @@
 #include "clibfuncs.h"
 #include "uart.h"
 #include "elf.h"
+#include "nalloc.h"
+#include "process.h"
 
 int global;
-#define NULL (void*)0
 extern long __bss_start;
 extern long __bss_end;
 extern struct ppage* free_list;
 
-unsigned int *gpset1 = 0xFE200020;
-unsigned int *gpclr1 = 0xFE20002C;
-unsigned int *gpsel4 = 0xFE200010;
-
-//HW1 Office Hours 2/1 w/ Jack
 void clear_bss()
 
 {
@@ -30,27 +26,18 @@ void clear_bss()
 		}
 }
 
-int getEL(){
-	unsigned int el;
-
-	asm("mrs %0,CurrentEL"
-		: "=r"(el)
-		:
-		:);
-
-}
-
 
 void kernel_main(){
 	clear_bss();
 
-	struct file fat_test;
+	uart_init();
+	memInit();
 
 	init_pfa_list();
 	sd_init();
 	fatInit();
 
-	_exec("shell");
+	_exec("shell",0);
 
 	while(1){
 

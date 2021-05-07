@@ -80,6 +80,7 @@ struct file {
     uint32_t start_cluster;
 };
 
+int fatInit();
 int fatOpen(struct file* readfile, char* filename);
 void fatRead(struct file* readfile, char* buffer,int bytes_read);
 
