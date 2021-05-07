@@ -20,7 +20,7 @@ struct page_descriptor_stage1 L2table[512] __attribute__((aligned(4096)));
 */
 
 
-void mapPages(void *vaddr, void *paddr) {
+void* mapPages(void *vaddr, void *paddr) {
     unsigned int L2tableIndex = ((unsigned int)vaddr >> 21) & 0x1ff;
     unsigned int L1tableIndex = ((unsigned int)vaddr >> 30) & 0x1ff;
 
@@ -34,6 +34,8 @@ void mapPages(void *vaddr, void *paddr) {
     L2table[L2tableIndex].ap = 0; // Access permission, kernel RW
     L2table[L2tableIndex].af = 1; // ??
     L2table[L2tableIndex].output_addr = (unsigned int)paddr >> 17; //
+
+    return vaddr;
 }
 
 

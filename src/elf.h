@@ -138,6 +138,6 @@ typedef struct{
 } Elf64_Phdr;
 
 int parse_elf_header(void *start);
-int is_elf(Elf64_Ehdr *hdr)
+int is_elf(Elf64_Ehdr *hdr);
 
 #endif

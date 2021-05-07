@@ -45,7 +45,7 @@ struct page_descriptor_stage1 {
 }__attribute__((packed));
 
 
-void mapPages(void *vaddr, void *paddr);
+void* mapPages(void *vaddr, void *paddr);
 int loadPageTable(struct table_descriptor_stage1 *L1table);
 
 

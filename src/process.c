@@ -9,8 +9,7 @@
 #include "serial.h"
 #include "process.h"
 
-struct process *currProcess;
-struct 
+struct process *currProcess; 
 
 //exec
 // 1 - copy elf file into memory
@@ -21,11 +20,11 @@ int _exec(char *path, char *argv[]){
 	unsigned int filesize;
 	int k;
 	void *temp_vaddr = (void*)0x200000;
-	struct physical_page *temp_space;
-	struct physical_page *junk_space;
-	struct physical_page *
-	struct Elf64_Ehdr *hdr; //file header
-	struct Elf64_Phdr *pr_hdr; //program header
+	struct ppage *temp_space;
+	struct ppage *junk_space;
+	
+	Elf64_Ehdr *hdr; //file header
+	Elf64_Phdr *pr_hdr; //program header
 	struct process *newProcess = nalloc(sizeof(struct process));
 	int argc = 1; //character count of argv. starts at 1 because argc will be 1 + number of spaces between arguments
 
@@ -40,30 +39,26 @@ int _exec(char *path, char *argv[]){
 	}
 	
 	if(newProcess == NULL){
-		return -1;
+		return -2;
 	}
 
-	if(fatOpen(path, &fd) < 0){
+	if(fatOpen(&fd,path) < 0){
 		return -1;
 	}
 
 	junk_space = allocate_physical_pages(1);	
 	mapPages(temp_vaddr,junk_space->physical_addr);
-
 	memset(newProcess, 0,sizeof(struct process)); // zero out memory in newProcess
-
 	strcpy(newProcess->path, path); //copy path if included in struct
 
-
-	currProcess = newProcess;
 	//TODO:create addProcess to add process to list of active processes; just use ListAdd() and create a dummy list of process
+	currProcess = newProcess;
+	
 
-	filesize = fd->rde->file_size / PAGE_SIZE + 1; 
+	filesize = fd.rde.file_size / PAGE_SIZE + 1; 
 	fatRead(&fd, (void*)temp_vaddr, filesize);
 
 
-
-	//temp buffer for headers
 	hdr = temp_vaddr;
 	pr_hdr = temp_vaddr + hdr->e_phoff;	
 
@@ -84,11 +79,11 @@ int _exec(char *path, char *argv[]){
 			return -1;
 		}
 
-		 //read contents of elf file into memory
 		vaddr += PAGE_SIZE;
-			
-
+	
 	}
+
+	asm("br %0" :: "r" (hdr->e_entry));
 
 
 

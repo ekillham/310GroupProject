@@ -5,7 +5,7 @@
 #include "mmu.h"
 #include "fat.h"
 #include "sd.h"
-#include "clibfunc.h"
+#include "clibfuncs.h"
 #include "uart.h"
 #include "elf.h"
 
@@ -42,7 +42,7 @@ int getEL(){
 
 
 void kernel_main(){
-//	clear_bss();
+	clear_bss();
 
 	struct file fat_test;
 
@@ -50,7 +50,7 @@ void kernel_main(){
 	sd_init();
 	fatInit();
 
-	//exec("/bin/shell");
+	_exec("shell");
 
 	while(1){
 
