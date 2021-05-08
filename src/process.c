@@ -26,11 +26,11 @@ int _exec(char *path, char *argv[]){
 	Elf64_Ehdr *hdr; //file header
 	Elf64_Phdr *pr_hdr; //program header
 	struct process *newProcess = nalloc(sizeof(struct process));
-	int argc = 1; //character count of argv. starts at 1 because argc will be 1 + number of spaces between arguments
+	int argc = 1; 
 
 // add check to verify that argv is not NULL. Count number of arguments in argv
 	if(argv == NULL){
-		// return error or esp_printf(putc, "No arguments");  ??
+		// return error or esp_printf(putc, "No arguments"); 
 	}
 	int i = 0;
 	while(argv[i] != NULL){
@@ -53,11 +53,9 @@ int _exec(char *path, char *argv[]){
 
 	//TODO:create addProcess to add process to list of active processes; just use ListAdd() and create a dummy list of process
 	currProcess = newProcess;
-	
 
 	filesize = fd.rde.file_size / PAGE_SIZE + 1; 
 	fatRead(&fd, (void*)temp_vaddr, filesize);
-
 
 	hdr = temp_vaddr;
 	pr_hdr = temp_vaddr + hdr->e_phoff;	
@@ -66,23 +64,17 @@ int _exec(char *path, char *argv[]){
 
 		void *vaddr = (void*) pr_hdr[i].p_vaddr;
 		struct ppage* page_alloc = 0;
-
-		
 		temp_space = allocate_physical_pages(1); 
 		temp_vaddr = mapPages(vaddr, page_alloc->physical_addr);   
 
 		if (pr_hdr[i].p_type == PT_LOAD){     //added check to see if program is loadable
 		memcpy(vaddr,temp_vaddr + pr_hdr[i].p_offset, pr_hdr[i].p_filesz);
 		}
-
 		if(temp_vaddr < 0) {
 			return -1;
 		}
-
 		vaddr += PAGE_SIZE;
-	
 	}
-
 	asm("br %0" :: "r" (hdr->e_entry));
 
 
